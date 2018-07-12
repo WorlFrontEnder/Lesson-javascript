@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> DropDown menu </title>
+    <style>
+      *,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', 'Arial', sans-serif;
+  background: #DDD url(https://tympanus.net/Tutorials/CustomDropDownListStyling/images/bg.jpg);
+  font-weight: 300;
+  font-size: 15px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.wrapper-dropdown-3 {
+  /* Size and position */
+  position: relative;
+  width: 200px;
+  margin: 40px auto;
+  padding: 10px;
+  /* Styles */
+  background: #fff;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 1px rgba(50, 50, 50, 0.1);
+  cursor: pointer;
+  outline: none;
+  /* Font settings */
+  font-weight: bold;
+  color: #8AA8BD;
+}
+
+.wrapper-dropdown-3:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -3px;
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #8aa8bd transparent;
+}
+
+.wrapper-dropdown-3 .dropdown {
+  /* Size & position */
+  position: absolute;
+  top: 140%;
+  left: 0;
+  right: 0;
+  /* Styles */
+  background: white;
+  border-radius: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  font-weight: normal;
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+  list-style: none;
+  /* Hiding */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wrapper-dropdown-3 .dropdown:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 15px;
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: #fff transparent;
+}
+
+.wrapper-dropdown-3 .dropdown:before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  bottom: 100%;
+  right: 13px;
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+.wrapper-dropdown-3 .dropdown li a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #8aa8bd;
+  border-bottom: 1px solid #e6e8ea;
+  box-shadow: inset 0 1px 0 white;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.wrapper-dropdown-3 .dropdown li i {
+  float: right;
+  color: inherit;
+}
+
+.wrapper-dropdown-3 .dropdown li:first-of-type a {
+  border-radius: 7px 7px 0 0;
+}
+
+.wrapper-dropdown-3 .dropdown li:last-of-type a {
+  border: none;
+  border-radius: 0 0 7px 7px;
+}
+
+/* Hover state */
+.wrapper-dropdown-3 .dropdown li:hover a {
+  background: #f3f8f8;
+}
+
+/* Active state */
+.wrapper-dropdown-3.active .dropdown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* No CSS3 support */
+.no-opacity .wrapper-dropdown-3 .dropdown,
+.no-pointerevents .wrapper-dropdown-3 .dropdown {
+  display: none;
+  opacity: 1;
+  /* If opacity support but no pointer-events support */
+  pointer-events: auto;
+  /* If pointer-events support but no pointer-events support */
+}
+
+.no-opacity .wrapper-dropdown-3.active .dropdown,
+.no-pointerevents .wrapper-dropdown-3.active .dropdown {
+  display: block;
+}
+
+    </style>
+  </head>
+  <body>
+
+    <body>
+    <html>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  </head>
+    
+  <body>
+    
+    <div id="dd" class="wrapper-dropdown-3" tabindex="1">
+    <span>Transport</span>
+    <ul class="dropdown">
+        <li><a href="#"><i class="icon-envelope icon-large"></i>Classic mail</a></li>
+        <li><a href="#"><i class="icon-truck icon-large"></i>UPS Delivery</a></li>
+        <li><a href="#"><i class="icon-plane icon-large"></i>Private jet</a></li>
+    </ul>
+</div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+            
+      function DropDown(el) {
+        this.dd = el;
+        this.placeholder = this.dd.children('span');
+        this.opts = this.dd.find('ul.dropdown > li');
+        this.val = '';
+        this.index = -1;
+        this.initEvents();
+      }
+      DropDown.prototype = {
+        initEvents : function() {
+          var obj = this;
+
+          obj.dd.on('click', function(event){
+            $(this).toggleClass('active');
+            return false;
+          });
+
+          obj.opts.on('click',function(){
+            var opt = $(this);
+            obj.val = opt.text();
+            obj.index = opt.index();
+            obj.placeholder.text(obj.val);
+          });
+        },
+        getValue : function() {
+          return this.val;
+        },
+        getIndex : function() {
+          return this.index;
+        }
+      }
+
+      $(function() {
+
+        var dd = new DropDown( $('#dd') );
+
+        $(document).click(function() {
+          // all dropdowns
+          $('.wrapper-dropdown-3').removeClass('active');
+        });
+
+      });
+
+    
+    </script>
+  </body>
+</html>

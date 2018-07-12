@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title>Проверка radio</title>
+    
+  </head>
+  <body>
+
+
+
+
+  	<input type="radio" name="r1" value="5"> 0
+     
+    <input type="radio" name="r1" value="53"> 1
+    <input type="radio" name="r1" value="535"> 2
+
+    <button onclick="radio()"> Проверка radio </button>
+
+
+
+    <script>
+      // Поиск по radio
+
+
+        function radio(){
+          var radio=document.getElementsByName('r1'); // Инициализация 
+
+          for(var i =0; i < radio.length; i++){ //  работаем как смасивом
+               if(radio[i].checked){
+                 alert('Выбор ' +i+ ' элемент');
+               }
+          }
+        }
+       
+    </script>
+  </body>
+</html>

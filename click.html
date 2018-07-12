@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> Table List </title>
+    <style>body {
+  background: #faa;
+}
+
+.button {
+  background-color: #3244ba;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  margin: 30px auto;
+  padding: 10px 15px;
+}
+.button.submitted {
+  background-color: green;
+}
+</style>
+  </head>
+  
+  
+    
+  <body>
+    
+
+    <form id="tweet-this" class="new-tweet">
+      <input type="submit" class="button" value="Tweet">
+    </form>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $('#tweet-this').submit(function(e){
+          e.preventDefault();
+          
+        $('.button', this).val('Tweeted!');
+        $('.button', this).addClass('submitted');
+        
+        setTimeout(function(){
+          $('#tweet-this .button').removeClass('submitted');
+          $('#tweet-this .button').val('Tweet');
+        },1500);
+          
+          return false;
+      });
+    </script>
+  </body>
+</html>

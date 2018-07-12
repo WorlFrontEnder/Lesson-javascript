@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> Table List </title>
+    <style>
+      table.table{
+          width: 300px;
+          border-collapse:collapse;
+          float: left;
+        }
+        table.table:last-of-type{
+          margin-left:10px;
+        }
+        table.table th{
+          text-align:left;
+        }
+
+        table.table tbody tr.selected {
+            background-color: #f0f0f0;
+        }
+    </style>
+  </head>
+  
+  
+    
+  <body>
+    
+  <table class="table" border="1">
+  <thead>
+    <tr>
+      <th>Coluna 1</th>
+      <th>Coluna 2</th>
+      <th><input type="checkbox" class="checkAll" name="checkAll" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr role="row">
+      <td>Texto 1</td>
+      <td>Texto 2</td>
+      <td><input type="checkbox" name="check" /></td>
+    </tr>
+    <tr role="row">
+      <td>Texto 1</td>
+      <td>Texto 2</td>
+      <td><input type="checkbox" name="check" /></td>
+    </tr>
+    <tr role="row">
+      <td>Texto 1</td>
+      <td>Texto 2</td>
+      <td><input type="checkbox" name="check" /></td>
+    </tr>
+    <tr role="row">
+      <td>Texto 1</td>
+      <td>Texto 2</td>
+      <td><input type="checkbox" name="check" /></td>
+    </tr>
+    <tr role="row">
+      <td>Texto 1</td>
+      <td>Texto 2</td>
+      <td><input type="checkbox" name="check" /></td>
+    </tr>
+  </tbody>
+</table>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+          $('.checkAll').on('click', function () {
+            $(this).closest('table').find('tbody :checkbox')
+              .prop('checked', this.checked)
+              .closest('tr').toggleClass('selected', this.checked);
+          });
+
+          $('tbody :checkbox').on('click', function () {
+            $(this).closest('tr').toggleClass('selected', this.checked); //Classe de seleção na row
+          
+            $(this).closest('table').find('.checkAll').prop('checked', ($(this).closest('table').find('tbody :checkbox:checked').length == $(this).closest('table').find('tbody :checkbox').length)); //Tira / coloca a seleção no .checkAll
+          });
+        });  
+    </script>
+  </body>
+</html>

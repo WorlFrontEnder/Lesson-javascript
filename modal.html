@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> Modal </title>
+    <style>
+      /*------------------------------------*\
+    #Modals
+\*------------------------------------*/
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  overflow-y: scroll;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(34, 34, 34, 0.9);
+  -webkit-transition: opacity 0.2s 0s ease-out, visibility 0s 0.2s;
+  transition: opacity 0.2s 0s ease-out, visibility 0s 0.2s;
+}
+.modal.animate-in {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 0.2s 0s ease-out, visibility 0s 0s;
+  transition: opacity 0.2s 0s ease-out, visibility 0s 0s;
+}
+
+.modal__dialog {
+  max-width: 700px;
+  margin: 24px auto;
+  -webkit-transform: translateY(-30px);
+  -moz-transform: translateY(-30px);
+  transform: translateY(-30px);
+  -webkit-transition: transform 0.2s 0s ease-out;
+  transition: transform 0.2s 0s ease-out;
+}
+.animate-in .modal__dialog {
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  transform: translateY(0);
+}
+
+.modal__dialog--small {
+  max-width: 500px;
+}
+
+.modal__dialog--large {
+  max-width: 1300px;
+}
+
+.modal__content {
+  position: relative;
+  padding: 24px;
+  border-radius: 3px;
+  background: #fff;
+}
+
+.modal__content__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 12px;
+}
+
+.modal__header {
+  padding: 24px;
+}
+
+.modal__body {
+  padding: 24px;
+  background: #f7f7f7;
+  border-top: 1px solid #ccc;
+}
+
+.modal__footer {
+  padding: 24px;
+}
+
+.modal-open {
+  overflow: hidden;
+  padding-right: 17px;
+}
+
+    </style>
+  </head>
+
+  <body>
+
+    <section class="mb+">
+  <h2>Modals</h2>
+  <a href="#modal-simple" class="btn  js-modal-open">Modal Simple</a>
+  <a href="#modal-section" class="btn  js-modal-open">Modal Sections</a>
+</section>
+
+<div id="modal-simple" class="modal">
+  <div class="modal__dialog">
+    <div class="modal__content">
+      <a ng-click="" class="modal__content__close  js-modal-close">X</a>
+      <h2>Heading</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus semper sed erat non laoreet. Suspendisse leo libero, rutrum ac blandit sit amet, suscipit sit amet libero.</p>
+    </div>
+  </div>
+</div>
+
+<div id="modal-section" class="modal">
+  <div class="modal__dialog">
+    <div class="modal__content  p0">
+      <a ng-click="" class="modal__content__close  js-modal-close">X</a>
+      <div class="modal__header">
+        <h2>Heading</h2>
+      </div>
+      <div class="modal__body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus semper sed erat non laoreet. Suspendisse leo libero, rutrum ac blandit sit amet, suscipit sit amet libero.</p>
+      </div>
+      <div class="modal__footer">
+        <div>Footer</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      function modal(el) {
+          $modal_id = el.attr('href');
+          $($modal_id).addClass("animate-in");
+          $('html').addClass('modal-open');
+        };
+
+        $(".js-modal-open").click(function(e) {
+          e.preventDefault();
+          modal($(this));
+        });
+
+        $('.modal').on('click', function() {
+          if ($(event.target).is($modal_id) || $(event.target).is('.js-modal-close')) {
+            $($modal_id).removeClass("animate-in");
+            $('html').removeClass('modal-open');
+          }
+
+        });
+    </script>
+  </body>
+</html>

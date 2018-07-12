@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> CSS генератор </title>
+    <style>
+      #block{
+        width: 200px;
+        height: 100px;
+        background: green;
+      }
+    </style>
+  </head>
+  <body>
+
+
+  <div class="block1">
+     <p> Верхний левый угол:
+        <input type="range" id="rangeTopLeft" min="0" max="100" value="0" oninput="fun1()">
+        <input type="text" id="textTopLeft" value="0">
+      </p> 
+
+      <p> Верхний правый угол:
+        <input type="range" id="rangeTopRight" min="0" max="100" value="0" oninput="fun1()">
+        <input type="text" id="textTopRight" value="0">
+      </p> 
+
+      <p> Нижний правый угол:
+        <input type="range" id="rangeBottomRight" min="0" max="100" value="0" oninput="fun1()">
+        <input type="text" id="textBottomRight" value="0">
+      </p> 
+
+      <p> Нижний левый угол:
+        <input type="range" id="rangeBottomLeft" min="0" max="100" value="0" oninput="fun1()">
+        <input type="text" id="textBottomLeft" value="0">
+      </p> 
+  </div>
+
+   <div id="block"></div>
+
+    <script>
+      function fun1() {
+        var rangeTopLeft = document.getElementById('rangeTopLeft').value;
+        var rangeTopRight = document.getElementById('rangeTopRight').value;
+        var rangeBottomRight = document.getElementById('rangeBottomRight').value;
+        var rangeBottomLeft = document.getElementById('rangeBottomLeft').value;
+
+        var textTopLeft = document.getElementById('textTopLeft');
+        var textTopRight = document.getElementById('textTopRight');
+        var textBottomRight = document.getElementById('textBottomRight');
+        var textBottomLeft = document.getElementById('textBottomLeft');
+
+        var block = document.getElementById('block');
+
+        textTopLeft.value = rangeTopLeft;
+        textTopRight.value = rangeTopRight;
+        textBottomRight.value = rangeBottomRight;
+        textBottomLeft.value = rangeBottomLeft;
+
+
+        block.style.borderRadius=rangeTopLeft+'px ' +rangeTopRight +'px ' +rangeBottomRight +'px '+rangeBottomLeft+'px ';
+
+      }
+
+
+       
+    </script>
+  </body>
+</html>

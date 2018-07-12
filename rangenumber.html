@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> Checkbox </title>
+    <style>
+      #test{
+        width: 20px;
+        height: 20px;
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+
+  
+     
+
+     <input type="range" min="0" max="100" step="1" oninput="fun1()" id="r1">
+     <p id="one"></p>
+    
+
+
+    <script>
+      function fun1(){
+       var rng=document.getElementById('r1');
+       var p=document.getElementById('one');
+       p.innerHTML=rng.value;
+      }
+       
+    </script>
+  </body>
+</html>

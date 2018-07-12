@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> DropDown menu </title>
+    <style>
+       *, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', 'Arial', sans-serif;
+  background: #DDD url(https://tympanus.net/Tutorials/CustomDropDownListStyling/images/bg.jpg);
+  font-weight: 300;
+  font-size: 15px;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.wrapper-dropdown-5 {
+  /* Size & position */
+  position: relative;
+  width: 200px;
+  margin: 40px auto;
+  padding: 12px 15px;
+  /* Styles */
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.wrapper-dropdown-5:after {
+  /* Little arrow */
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -3px;
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #4cbeff transparent;
+}
+
+.wrapper-dropdown-5 .dropdown {
+  /* Size & position */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  /* Styles */
+  background: #fff;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: none;
+  border-bottom: none;
+  list-style: none;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  /* Hiding */
+  max-height: 0;
+  overflow: hidden;
+}
+
+.wrapper-dropdown-5 .dropdown li {
+  padding: 0 10px;
+}
+
+.wrapper-dropdown-5 .dropdown li a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  padding: 10px 0;
+  transition: all 0.3s ease-out;
+  border-bottom: 1px solid #e6e8ea;
+}
+
+.wrapper-dropdown-5 .dropdown li:last-of-type a {
+  border: none;
+}
+
+.wrapper-dropdown-5 .dropdown li i {
+  margin-right: 5px;
+  color: inherit;
+  vertical-align: middle;
+}
+
+/* Hover state */
+.wrapper-dropdown-5 .dropdown li:hover a {
+  color: #57a9d9;
+}
+
+/* Active state */
+.wrapper-dropdown-5.active {
+  border-radius: 5px 5px 0 0;
+  background: #4cbeff;
+  box-shadow: none;
+  border-bottom: none;
+  color: white;
+}
+
+.wrapper-dropdown-5.active:after {
+  border-color: #82d1ff transparent;
+}
+
+.wrapper-dropdown-5.active .dropdown {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  max-height: 400px;
+}
+
+    </style>
+  </head>
+  <body>
+
+    <body>
+    <html>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  </head>
+    
+  <body>
+    
+    <div id="dd" class="wrapper-dropdown-5" tabindex="1">John Doe
+        <ul class="dropdown">
+            <li><a href="#"><i class="icon-user"></i>Profile</a></li>
+            <li><a href="#"><i class="icon-cog"></i>Settings</a></li>
+            <li><a href="#"><i class="icon-remove"></i>Log out</a></li>
+        </ul>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      
+      function DropDown(el) {
+        this.dd = el;
+        this.initEvents();
+      }
+      DropDown.prototype = {
+        initEvents : function() {
+          var obj = this;
+
+          obj.dd.on('click', function(event){
+            $(this).toggleClass('active');
+            event.stopPropagation();
+          }); 
+        }
+      }
+
+      $(function() {
+
+        var dd = new DropDown( $('#dd') );
+
+        $(document).click(function() {
+          // all dropdowns
+          $('.wrapper-dropdown-5').removeClass('active');
+        });
+
+      });
+
+    
+    </script>
+  </body>
+</html>

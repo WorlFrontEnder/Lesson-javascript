@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> DropDown menu </title>
+    <style>
+      body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
+}
+input[type='radio'].material {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  opacity: 0;
+  /*  Style radiobutton's disable state */
+}
+input[type='radio'].material:checked + span.radio-mockup {
+  border-color: #03a9f4;
+}
+input[type='radio'].material:checked + span.radio-mockup:after {
+  height: 0.8em;
+  width: 0.8em;
+  transform: translate(0.09em, 0.09em);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25);
+  -webkit-animation: grow 0.4s ease-out;
+  animation: grow 0.4s ease-out;
+}
+input[type='radio'].material:disabled ~ span.radio-mockup-text {
+  color: gray;
+}
+input[type='radio'].material:disabled + span.radio-mockup {
+  border-color: gray;
+}
+input[type='radio'].material:disabled + span.radio-mockup:after {
+  background: gray;
+}
+span.radio-mockup {
+  border-radius: 100%;
+  border: 2px solid black;
+  position: relative;
+  vertical-align: middle;
+  background-color: transparent;
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  margin-right: 10px;
+  cursor: pointer;
+}
+span.radio-mockup-text {
+  vertical-align: middle;
+}
+span.radio-mockup:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  background: #03a9f4;
+  height: 0px;
+  width: 0px;
+  transform: translate(0.5em, 0.5em);
+  border-radius: 100%;
+  transform-origin: 45% 45%;
+  transition: transform 0.2s, height 0.2s, width 0.2s;
+}
+@-webkit-keyframes grow {
+  100% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0.25);
+  }
+}
+@keyframes grow {
+  100% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0.25);
+  }
+}
+
+    </style>
+  </head>
+  <body>
+
+    <body>
+    <html>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  </head>
+    
+  <body>
+    
+    <input type="radio" class="material" data-label="Esta es una opcion"/> <br/>
+    <input type="radio" class="material" data-label="Esta es una opcion"/><br/>
+    <input type="radio" class="material" data-label="Esta es una opcion" disabled="disabled" checked/>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+          $("input[type='radio'].material").each(function(index){
+            var htmlMarkup = "<span class='radio-mockup'></span>"+
+                "<span class='radio-mockup-text'>"+
+                $(this).attr("data-label")+
+                "</span>";
+            $(htmlMarkup).insertAfter($(this));
+          });
+
+          
+          $("body").on("click", "input[type='radio'].material:not(:disabled) + .radio-mockup",
+              function(){
+                var checkbox = $(this).prev("input[type='radio'].material");
+                checkbox.prop("checked", !checkbox.prop("checked"));
+            /*$(this).animate({
+              boxShadow: "0px 0px 0px 15px rgba(0, 0, 0, 0.25)"
+            }, 400);*/
+          });
+        });
+    </script>
+  </body>
+</html>

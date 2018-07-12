@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> select </title>
+    
+  </head>
+  <body>
+
+
+     
+    <select name="" id="mySelect" onchange="fun1()">
+      <option value="">Apple</option>
+      <option value="">Facebook</option>
+      <option value="">Mail</option>
+      <option value="">Gmail</option>
+    </select>
+
+  
+    <script>
+      function fun1(){
+         var sel = document.getElementById('mySelect').selectedIndex;
+         var options = document.getElementById('mySelect').options;
+
+         alert('Выбранна опция ' +options[sel].text)  
+        }   
+    </script>
+  </body>
+</html>

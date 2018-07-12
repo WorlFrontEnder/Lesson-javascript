@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-control" content="public">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    
+    <title> Modal </title>
+    
+  </head>
+
+  <body>
+
+    <canvas class="html"></canvas>
+    <canvas class="css"></canvas>
+    <canvas class="javascript"></canvas>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+       var skills = [
+        {
+            name: 'HTML5',
+            selector: ".html",
+            procent: 60
+        },
+        {
+            name: 'CSS3',
+            selector: ".css",
+            procent: 80,
+        },
+         {
+             name: 'JavaScript',
+             selector: ".javascript",
+             procent: 50,
+         }
+    ];
+
+    window.onload = function () {
+        for (var i in skills) {
+            drawChart(skills[i]);
+        }
+    }
+
+    var settings = {
+        canvasHeight: 300,
+        canvasWidth: 300,
+        chartBackColor: '#ecf0f1',
+        chartFrontColor: '#3498db',
+        textColor: '#95a5a6',
+        lineWidth: 30,
+        interval: 10,
+        font: function () {
+            return this.fontSize.toString() + 'px ' + this.fontFamily;
+        },
+        fontSize: 25,
+        fontFamily: 'Arial',
+        fontOffsetHeight: function () {
+            return this.fontSize / 3;
+        }
+    }
+
+    function drawChart(skill) {
+        var canvas = document.querySelector(skill.selector);
+        var ctx = canvas.getContext('2d');
+        canvas.height = settings.canvasHeight;
+        canvas.width = settings.canvasWidth;
+
+        var fullCircle = 360 * Math.PI / 180;
+        var width = canvas.width;
+        var height = canvas.height;
+        var counter = 0;
+        var color = settings.chartFrontColor
+        var bgColor = settings.chartBackColor;
+        var interval, finishAngle, textWidth, isBackward = false;
+
+        function drawCircle(color, procent) {
+            ctx.clearRect(0, 0, width, height);
+            //background circle
+            finishAngle = fullCircle * 100;
+            ctx.beginPath();
+            ctx.strokeStyle = bgColor;
+            ctx.arc(height / 2, height / 2, 100, 0 - (fullCircle / 4), finishAngle - (fullCircle / 4), false);
+            ctx.lineWidth = settings.lineWidth;
+            ctx.stroke();
+            //Front circle
+            finishAngle = fullCircle * procent / 100;
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.arc(height / 2, height / 2, 100, 0 - (fullCircle / 4), finishAngle - (fullCircle / 4), false);
+            ctx.lineWidth = settings.lineWidth;
+            ctx.stroke();
+            ctx.fillStyle = settings.textColor;
+            ctx.font = settings.font();
+            textWidth = ctx.measureText(skill.name).width;
+            ctx.fillText(skill.name, (width / 2) - (textWidth / 2), height / 2 + settings.fontOffsetHeight());
+        }
+
+        function draw() {
+            if (!isBackward && counter <= 100) {
+                drawCircle(color, counter);
+                counter = counter + 2;
+                if (counter == 100) {
+                    isBackward = true;
+                }
+            }
+            else {
+                if (counter > skill.procent) {
+                    drawCircle(color, counter);
+                    counter = counter - 1.5;
+                }
+                else {
+                    clearInterval(interval);
+                }
+            }
+        }
+        interval = setInterval(draw, settings.interval);
+    }
+    </script>
+  </body>
+</html>
