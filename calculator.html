@@ -11,7 +11,6 @@
     <title> DropDown menu </title>
     <style>
       body {
-  width: 500px;
   margin: 4% auto;
   font-family: 'Source Sans Pro', sans-serif;
   letter-spacing: 5px;
@@ -26,6 +25,8 @@
   -webkit-box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
   border-radius: 1px;
+    width: 465px;
+  margin: 0 auto;
 }
 
 .input {
@@ -161,7 +162,7 @@ div.equal:active {
         <div>2</div>
         <div>3</div>
       </div>
-      
+
       <div class="numbers">
         <div>0</div>
         <div>.</div>
@@ -177,32 +178,36 @@ div.equal:active {
     <script>
       "use strict";
 
-var input = document.getElementById('input'), // input/output button
-  number = document.querySelectorAll('.numbers div'), // number buttons
-  operator = document.querySelectorAll('.operators div'), // operator buttons
-  result = document.getElementById('result'), // equal button
-  clear = document.getElementById('clear'), // clear button
-  resultDisplayed = false; // flag to keep an eye on what output is displayed
 
-// adding click handlers to number buttons
+ // поиск кнопок
+var input = document.getElementById('input'); // кнопка вход/выход 
+var number = document.querySelectorAll('.numbers div'); // цифровые кнопки
+var operator = document.querySelectorAll('.operators div'); // кнопки оператора
+var result = document.getElementById('result'); // кнопка равенства
+var clear = document.getElementById('clear'); // кнопка Clear
+var resultDisplayed = false; // флаг, чтобы следить за тем, что вывод отображается
+
+
+
+// добавление обработчиков щелчков в цифровые кнопки
 for (var i = 0; i < number.length; i++) {
   number[i].addEventListener("click", function(e) {
 
-    // storing current input string and its last character in variables - used later
+    // сохранение текущей входной строки и ее последнего символа в переменных-используется позже
     var currentString = input.innerHTML;
     var lastChar = currentString[currentString.length - 1];
 
-    // if result is not diplayed, just keep adding
+    // если результат не отображается, просто продолжайте добавлять
     if (resultDisplayed === false) {
       input.innerHTML += e.target.innerHTML;
     } else if (resultDisplayed === true && lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷") {
-      // if result is currently displayed and user pressed an operator
-      // we need to keep on adding to the string for next operation
+      // если результат отображается, и Пользователь нажал оператора
+      // нам нужно продолжать добавлять строку для следующей операции
       resultDisplayed = false;
       input.innerHTML += e.target.innerHTML;
     } else {
-      // if result is currently displayed and user pressed a number
-      // we need clear the input string and add the new input to start the new opration
+      // если результат отображается, и Пользователь нажал number
+      //нам нужно очистить строку ввода и добавить новый вход, чтобы начать новую операцию
       resultDisplayed = false;
       input.innerHTML = "";
       input.innerHTML += e.target.innerHTML;
@@ -211,40 +216,49 @@ for (var i = 0; i < number.length; i++) {
   });
 }
 
-// adding click handlers to number buttons
+
+
+
+
+// добавление обработчиков щелчков в цифровые кнопки
 for (var i = 0; i < operator.length; i++) {
   operator[i].addEventListener("click", function(e) {
 
-    // storing current input string and its last character in variables - used later
+    // сохранение текущей входной строки и ее последнего символа в переменных-используется позже
     var currentString = input.innerHTML;
     var lastChar = currentString[currentString.length - 1];
 
-    // if last character entered is an operator, replace it with the currently pressed one
+    // если последний введенный символ является оператором, замените его на текущий
     if (lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷") {
       var newString = currentString.substring(0, currentString.length - 1) + e.target.innerHTML;
       input.innerHTML = newString;
     } else if (currentString.length == 0) {
-      // if first key pressed is an opearator, don't do anything
+      // если первая клавиша нажата оператор, ничего не делать
       console.log("enter a number first");
     } else {
-      // else just add the operator pressed to the input
+      // остальное просто добавьте оператор нажатой на вход
       input.innerHTML += e.target.innerHTML;
     }
 
   });
 }
 
-// on click of 'equal' button
+
+
+
+
+
+// по щелчку кнопки "равно"
 result.addEventListener("click", function() {
 
-  // this is the string that we will be processing eg. -10+26+33-56*34/23
+  // это строка, которую мы будем обрабатывать, например. -10+26+33-56*34/23
   var inputString = input.innerHTML;
 
-  // forming an array of numbers. eg for above string it will be: numbers = ["10", "26", "33", "56", "34", "23"]
+  // формирование массива чисел. например, для строки выше это будет: numbers = ["10", "26", "33", "56", "34", "23"]
   var numbers = inputString.split(/\+|\-|\×|\÷/g);
 
-  // forming an array of operators. for above string it will be: operators = ["+", "+", "-", "*", "/"]
-  // first we replace all the numbers and dot with empty string and then split
+  // формирование массива операторов. для вышеприведенной строки это будет: operators = ["+"," +", "-", "*", "/"]
+  // сначала мы заменим все числа и точку пустой строкой, а затем разделим
   var operators = inputString.replace(/[0-9]|\./g, "").split("");
 
   console.log(inputString);
@@ -252,10 +266,10 @@ result.addEventListener("click", function() {
   console.log(numbers);
   console.log("----------------------------");
 
-  // now we are looping through the array and doing one operation at a time.
-  // first divide, then multiply, then subtraction and then addition
-  // as we move we are alterning the original numbers and operators array
-  // the final element remaining in the array will be the output
+  // теперь мы проходим через массив и выполняем одну операцию за раз.
+  // сначала разделите, затем умножьте, затем вычитание, а затем сложение
+  // по мере продвижения мы изменяем исходные числа и операторы массива
+  // последним элементом, оставшимся в массиве, будет выход
 
   var divide = operators.indexOf("÷");
   while (divide != -1) {
@@ -280,18 +294,18 @@ result.addEventListener("click", function() {
 
   var add = operators.indexOf("+");
   while (add != -1) {
-    // using parseFloat is necessary, otherwise it will result in string concatenation :)
+    // необходимо использовать parseFloat, иначе это приведет к конкатенации строк :)
     numbers.splice(add, 2, parseFloat(numbers[add]) + parseFloat(numbers[add + 1]));
     operators.splice(add, 1);
     add = operators.indexOf("+");
   }
 
-  input.innerHTML = numbers[0]; // displaying the output
+  input.innerHTML = numbers[0]; // вывода
 
-  resultDisplayed = true; // turning flag if result is displayed
+  resultDisplayed = true; // поворот флага при отображении результата
 });
 
-// clearing the input on press of clear
+// очищать входной сигнал на давлении ясности
 clear.addEventListener("click", function() {
   input.innerHTML = "";
 })
